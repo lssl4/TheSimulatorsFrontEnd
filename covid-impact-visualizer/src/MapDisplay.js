@@ -13,7 +13,6 @@ class MapDisplay extends Component {
         this.updateDimensions = this.updateDimensions.bind(this);
     }
 
-    //TODO: Fix up dimensions as currently the user needs to scroll down in order to see the map
     updateDimensions() {
         const h = window.innerWidth >= 992 ? window.innerHeight : window.height
         this.setState({height : h})

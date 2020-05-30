@@ -7,7 +7,6 @@ import MapDisplay from "./MapDisplay.js";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
     <MapDisplay></MapDisplay>
   </React.StrictMode>,
   document.getElementById('root')
