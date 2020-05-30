@@ -3,10 +3,12 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import MapDisplay from "./MapDisplay.js";
 
 ReactDOM.render(
   <React.StrictMode>
     <App />
+    <MapDisplay></MapDisplay>
   </React.StrictMode>,
   document.getElementById('root')
 );
