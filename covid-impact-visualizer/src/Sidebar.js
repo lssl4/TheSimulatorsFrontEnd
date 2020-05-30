@@ -1,14 +1,6 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import './Sidebar.css';
 import "./componentStyles.css"
-
-
-
-
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
 
 function App() {
   return (
@@ -18,13 +10,13 @@ function App() {
         <label class="switch">
         <input type="checkbox"></input>
         <span class="slider round"></span>
-      </label>
+        </label>
 
       <div className="population_text"> 
             <b>Population Density</b> 
-          </div>
+        </div>
 
-      </div> 
+    </div> 
   );
 }
 export default App;
