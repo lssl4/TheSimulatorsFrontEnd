@@ -6,7 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import "./App.css";
 
-const VALUES = ["2019-01-01", "2019-02-01", "2019-03-01"];
+const VALUES = ["05/02/2002", "06/02/2002", "07/02/2002"];
 
 class App extends React.Component {
   state = { value: 0, previous: 0 };
@@ -40,7 +40,6 @@ class App extends React.Component {
               />
             </Col>
           </Row>
-          <div style={{ textAlign: "center" }}>New one</div>
         </Container>
       </body>
     );
