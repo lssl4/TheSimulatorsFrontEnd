@@ -1,27 +1,5 @@
-.App {
-  text-align: center;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
+body {
   font-size: calc(10px + 2vmin);
   color: white;
-  background-color: #282c34;
-}
-
-.mapLayout {
-  display: flex;
-  align-items: row;
-}
-
-.mapElement {
-  display: flex;
-}
-
-.sidebarElement {
-  display: flex;
-}
-
-.App-link {
-  color: #61dafb;
+  background-color: #264653;
 }
