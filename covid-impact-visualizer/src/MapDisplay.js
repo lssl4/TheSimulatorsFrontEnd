@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import {Map, View} from 'ol';
 import {Tile as TileLayer} from 'ol/layer';
-import {XYZ as XYZSource, TileWMS as TileWMSSource} from 'ol/source';
-import {ScaleLine, ZoomSlider, OverviewMap, defaults as DefaultControls} from 'ol/control';
+import {WMTS as WMTSSource} from 'ol/source';
+import WMTSTileGrid from 'ol/tilegrid/WMTS'
+import {ScaleLine, ZoomSlider, defaults as DefaultControls} from 'ol/control';
 
 
 class MapDisplay extends Component {
@@ -12,8 +13,9 @@ class MapDisplay extends Component {
         this.updateDimensions = this.updateDimensions.bind(this);
     }
 
+    //TODO: Fix up dimensions as currently the user needs to scroll down in order to see the map
     updateDimensions() {
-        const h = window.innerWidth >= 992 ? window.innerHeight : 400
+        const h = window.innerWidth >= 992 ? window.innerHeight : window.height
         this.setState({height : h})
     }
 
@@ -23,40 +25,50 @@ class MapDisplay extends Component {
     }
 
     componentDidMount() {
-        // Create an Openlayer Map instance with two tile layers
+
+        // Create an Openlayer Map instance which will hold the different map layers
         const map = new Map({
-            //Display the map in the div with the id of map
+            //Display the map in the div with the id of 'map'
             target: 'map',
             layers: [
                 new TileLayer({
-                    source: new XYZSource({
-                        url: 'https://{a-c}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-                        projection: 'EPSG:3857'
+                    source: new WMTSSource({
+                        //TODO: first option gives real time map however data may not be available for current day yet
+                        //      second option retrieves data at given date
+                        //url: 'https://gibs-{a-c}.earthdata.nasa.gov/wmts/epsg4326/best/wmts.cgi',
+                        url: 'https://gibs-{a-c}.earthdata.nasa.gov/wmts/epsg4326/best/wmts.cgi?TIME=2020-05-29',
+                        layer: 'MODIS_Terra_CorrectedReflectance_TrueColor',
+                        format: 'image/jpeg',
+                        matrixSet: 'EPSG4326_250m',
+                        tileGrid: new WMTSTileGrid({
+                          origin: [-180, 90],
+                          resolutions: [
+                            0.5625,
+                            0.28125,
+                            0.140625,
+                            0.0703125,
+                            0.03515625,
+                            0.017578125,
+                            0.0087890625,
+                            0.00439453125,
+                            0.002197265625
+                          ],
+                          matrixIds: [0, 1, 2, 3, 4, 5, 6, 7, 8],
+                          tileSize: 512
+                        })
                     })
-                }),
-                new TileLayer({
-                    source: new TileWMSSource({
-                        url: 'https://ahocevar.com/geoserver/wms',
-                        params: {
-                            layers: 'topp:states',
-                            'TILED': true,
-                        },
-                        projection: 'EPSG:4326'
-                    }),
-                    name: 'USA'
                 })
             ],
             //Add in the following map controls
             controls: DefaultControls().extend([
                 new ZoomSlider(),
-                new ScaleLine(),
-                new OverviewMap()
+                new ScaleLine()
             ]),
             //Render the tile layers in a map view with a Mercator projection
             view: new View({
-                projection: 'EPSG:3857',
+                projection: 'EPSG:4326',
                 center:[0, 0],
-                zoom: 2
+                zoom: 1
             })
         })
     }
