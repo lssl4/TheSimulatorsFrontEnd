@@ -1,13 +1,50 @@
-import React from 'react';
-import './App.css';
+import React from "react";
+import HorizontalTimeline from "react-horizontal-timeline";
+import MapDisplay from "./MapDisplay";
+import { Container, Row, Col } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-      </header>
-    </div>
-  );
+import "./App.css";
+
+const VALUES = ["2019-01-01", "2019-02-01", "2019-03-01"];
+
+class App extends React.Component {
+  state = { value: 0, previous: 0 };
+
+  render() {
+    return (
+      <body>
+        <Container>
+          <Row className="justify-content-sm-center">
+            <Col>
+              <header style={{ textAlign: "center" }} className="App-header">
+                World Map
+              </header>
+            </Col>
+          </Row>
+
+          <Row className="justify-content-sm-center">
+            <Col sm={12}>
+              <MapDisplay />
+            </Col>
+          </Row>
+
+          <Row className="timeline">
+            <Col>
+              <HorizontalTimeline
+                index={this.state.value}
+                indexClick={(index) => {
+                  this.setState({ value: index, previous: this.state.value });
+                }}
+                values={VALUES}
+              />
+            </Col>
+          </Row>
+          <div style={{ textAlign: "center" }}>New one</div>
+        </Container>
+      </body>
+    );
+  }
 }
 
 export default App;
