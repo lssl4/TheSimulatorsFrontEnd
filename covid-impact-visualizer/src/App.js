@@ -6,6 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import "./Sidebar.css";
 import Timeline from "./Timeline";
+import CovidDisplay from "./CovidDisplay";
 
 class App extends React.Component {
   constructor(props) {
@@ -27,6 +28,7 @@ class App extends React.Component {
   }
   render() {
     return (
+      
       <body>
         <Container>
           <Row className="justify-content-sm-center">
@@ -38,6 +40,7 @@ class App extends React.Component {
           </Row>
 
           <Row className="justify-content-sm-center">
+            
             <Col sm={9}>
               <MapDisplay></MapDisplay>
             </Col>

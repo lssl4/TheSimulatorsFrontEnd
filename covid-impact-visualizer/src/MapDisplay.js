@@ -24,7 +24,7 @@ import { Vector as VectorLayer } from "ol/layer";
 import { Vector } from "ol/source";
 import { Style, Icon } from "ol/style";
 import { Point } from "ol/geom";
-import { fromLonLat } from "ol/proj";
+import { transform } from "ol/proj";
 
 class MapDisplay extends Component {
   map = new Map();
@@ -48,13 +48,6 @@ class MapDisplay extends Component {
   }
 
   componentDidMount() {
-    var vectorLayer = new VectorLayer({
-      source: new Vector({
-        features: [new Feature({ geometry: new Point(fromLonLat([24, 24])) })],
-      }),
-      style: new Style({ pointRadius: 6, fillColor: "red", fillOpacity: 0.5 }),
-    });
-
     // Create an Openlayer Map instance which will hold the different map layers
     this.map = new Map({
       //Display the map in the div with the id of 'map'
@@ -64,9 +57,7 @@ class MapDisplay extends Component {
         populationDensityLayer,
         landSurfaceDayTempLayer,
         landSurfaceNightTempLayer,
-        nightTimeLightsLayer,
-        referenceLayer,
-        vectorLayer,
+        referenceLayer
       ],
       interactions: DefaultInteractions().extend([new DragRotateAndZoom()]),
 
@@ -85,6 +76,11 @@ class MapDisplay extends Component {
         zoom: 1,
       }),
     });
+
+    //TODO: later this data can be used to get covid data cloest to selected coordinate
+    this.map.on('click', function(evt){
+      let coordinate = transform(evt.coordinate);
+    })
   }
 
   componentWillUnmount() {
