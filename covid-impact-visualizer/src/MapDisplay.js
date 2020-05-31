@@ -57,7 +57,6 @@ class MapDisplay extends Component {
         populationDensityLayer,
         landSurfaceDayTempLayer,
         landSurfaceNightTempLayer,
-        nightTimeLightsLayer,
         referenceLayer
       ],
       interactions: DefaultInteractions().extend([new DragRotateAndZoom()]),
