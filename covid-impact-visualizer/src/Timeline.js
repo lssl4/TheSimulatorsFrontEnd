@@ -12,13 +12,16 @@ export default class Timeline extends Component {
     this.state = {
       min: props.min,
       max: props.max,
+      value: Math.round((Number(props.min) + Number(props.max)) / 2),
     };
+
     this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange(event) {
-    console.log("this event: ", JSON.stringify(event));
-    this.setState({ min: event.target.min, max: event.target.max });
+    this.setState({
+      value: event.target.value,
+    });
   }
 
   render() {
@@ -31,13 +34,14 @@ export default class Timeline extends Component {
           Timeline Range
         </label>
         <p>
-          Value: <span id="timelineValue"> </span>
+          Value: <span id="timelineValue"> {this.state.value}</span>
         </p>
         <input
           id="timelineRange"
           type="range"
           min={this.state.min}
           max={this.state.max}
+          onChange={this.handleChange}
         />
         <Row id="timelineRangeLabels" style={{ fontSize: "0.75em" }}>
           <Col sm={12}>
