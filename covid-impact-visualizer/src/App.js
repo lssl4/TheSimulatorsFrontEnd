@@ -8,9 +8,27 @@ import "./Sidebar.css";
 import Timeline from "./Timeline";
 
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      minDate: 0,
+      maxDate: 0,
+    };
+  }
+
+  getMinAndMaxDate() {
+    return { min: "34", max: "90" };
+  }
+
+  componentWillMount() {
+    var dates = this.getMinAndMaxDate();
+    this.state.minDate = Number(dates.min);
+    this.state.maxDate = Number(dates.max);
+    this.state.selectedDate = (Number(dates.min) + Number(dates.max)) / 2;
+  }
+
   render() {
     return (
-      
       <body>
         <Container>
           <Row className="justify-content-sm-center">
@@ -23,7 +41,7 @@ class App extends React.Component {
 
           <Row className="justify-content-sm-center">
             <Col sm={9}>
-              <MapDisplay></MapDisplay>
+              <MapDisplay date={this.state.selectedDate}></MapDisplay>
             </Col>
             <Col sm={3}>
               <div className="sidebar">
