@@ -3,3 +3,15 @@ body {
   color: white;
   background-color: #264653;
 }
+
+#timelineRange {
+  width: 100%;
+}
+
+#timelineRangeLabels {
+  list-style: none;
+}
+
+#timelineRangeLabels li {
+  float: left;
+}

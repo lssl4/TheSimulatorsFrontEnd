@@ -10,10 +10,9 @@ import "./Sidebar.css";
 const VALUES = ["2019-01-01", "2019-02-01", "2019-03-01"];
 
 class App extends React.Component {
-  state = { value: 0, previous: 0 };
-
   render() {
     return (
+      
       <body>
         <Container>
           <Row className="justify-content-sm-center">
@@ -26,7 +25,7 @@ class App extends React.Component {
 
           <Row className="justify-content-sm-center">
             <Col sm={9}>
-              <MapDisplay />
+              <MapDisplay></MapDisplay>
             </Col>
             <Col sm={3}>
               <div className="sidebar">
@@ -45,14 +44,8 @@ class App extends React.Component {
           </Row>
 
           <Row className="timeline">
-            <Col>
-              <HorizontalTimeline
-                index={this.state.value}
-                indexClick={(index) => {
-                  this.setState({ value: index, previous: this.state.value });
-                }}
-                values={VALUES}
-              />
+            <Col sm={12}>
+              <Timeline min="2" max="110" />
             </Col>
           </Row>
           <div style={{ textAlign: "center" }}>New one</div>
