@@ -1,6 +1,9 @@
-import { Tile as TileLayer } from "ol/layer";
+import { Tile as TileLayer, Vector as VectorLayer } from "ol/layer";
 import { WMTS as WMTSSource } from "ol/source";
+import { Style as StyleMap} from "ol/style";
+import { Point } from "ol/geom";
 import WMTSTileGrid from "ol/tilegrid/WMTS";
+import {Markers} from "ol/layer";
 
 const baseLayer = new TileLayer({
                     source: new WMTSSource({
@@ -144,7 +147,7 @@ export {UVDoesAndIndexLayer};
 
 const nightTimeLightsLayer = new TileLayer({
     source: new WMTSSource({
-      url: "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/",
+      url: "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/?TIME=2020-05-29",
       layer: "VIIRS_SNPP_DayNightBand_ENCC",
       format: "image/png",
       matrixSet: "EPSG4326_500m",
@@ -169,6 +172,30 @@ const nightTimeLightsLayer = new TileLayer({
   });
   
 export {nightTimeLightsLayer};
+
+/*
+var styleMap = new StyleMap({pointRadius: 6, fillColor: "red", fillOpacity: 0.5 });
+const markersLayer = new VectorLayer({ styleMap: styleMap});
+var exampleCity= {
+  confirmedCases:10,
+  recoveredCases:5,
+  activeCases:3,
+  deaths:2,
+  city:"Brisbane",
+  state:"Queensland",
+  country:"Australia",
+  longitude:100.0,
+  latitude:100.0 };
+
+var covidCityCases = [ exampleCity ];
+for(var i = 0; i < covidCityCases.length; i++) {
+    var longitude = covidCityCases[i].longitude;
+    var latitude = covidCityCases[i].latitude;
+    var feature = new VectorFeature(
+      new Point(longitude, latitude), {description: "Confirmed: " + covidCityCases[i].confirmedCases});
+    markersLayer[i].addFeatures(feature);
+}
+*/
 
 const referenceLayer = new TileLayer({
       source: new WMTSSource({
