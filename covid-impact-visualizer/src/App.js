@@ -12,7 +12,7 @@ const VALUES = ["2019-01-01", "2019-02-01", "2019-03-01"];
 class App extends React.Component {
   render() {
     return (
-      
+
       <body>
         <Container>
           <Row className="justify-content-sm-center">
@@ -32,6 +32,7 @@ class App extends React.Component {
                 <h2>Factors</h2>
 
                 <label class="switch">
+
                   <input type="checkbox"></input>
                   <span class="slider round"></span>
                 </label>
@@ -39,13 +40,35 @@ class App extends React.Component {
                 <div className="population_text">
                   <b>Population Density</b>
                 </div>
+
+                <label class="switch">
+
+                  <input type="checkbox"></input>
+                  <span class="slider round"></span>
+                </label>
+
+                <div className="population_text">
+                  <b>Surface Day Temp</b>
+                </div>
+
+                <label class="switch">
+
+                  <input type="checkbox"></input>
+                  <span class="slider round"></span>
+                </label>
+
+                <div className="population_text">
+                  <b>Surface Night Temp</b>
+                </div>
+
+
               </div>
             </Col>
           </Row>
 
           <Row className="timeline">
             <Col sm={12}>
-              <Timeline min="2" max="110" />
+              {/* <Timeline min="2" max="110" /> */}
             </Col>
           </Row>
           <div style={{ textAlign: "center" }}>New one</div>
