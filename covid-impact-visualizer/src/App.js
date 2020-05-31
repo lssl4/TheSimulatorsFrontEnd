@@ -26,7 +26,7 @@ class App extends React.Component {
             <Col sm={3}>
               <div className="sidebar">
                 <h2> Covid Data </h2>
-                <CovidDisplay></CovidDisplay>
+                
               </div>
             </Col>
             <Col sm={9}>
