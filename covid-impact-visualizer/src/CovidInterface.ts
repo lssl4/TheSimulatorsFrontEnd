@@ -9,3 +9,5 @@ interface CovidDataInterface {
     latitude: number;
     longitude : number;
 }
+
+export default CovidDataInterface
