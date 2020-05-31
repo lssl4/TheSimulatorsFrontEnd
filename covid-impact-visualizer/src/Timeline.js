@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Row, Col } from "react-bootstrap";
+import { MapDisplay } from "./MapDisplay";
+
+import { updateMapLayers } from "./MapDisplay-Layers.js";
 
 export default class Timeline extends Component {
   static propTypes = {
@@ -15,6 +18,8 @@ export default class Timeline extends Component {
       value: Math.round((Number(props.min) + Number(props.max)) / 2),
     };
 
+    console.log("asdf: " + JSON.stringify(this.state));
+
     this.handleChange = this.handleChange.bind(this);
   }
 
@@ -22,6 +27,8 @@ export default class Timeline extends Component {
     this.setState({
       value: event.target.value,
     });
+    var mapLayersArray = updateMapLayers(this.state.value);
+    this.map = this.props.updateMap(mapLayersArray);
   }
 
   render() {
@@ -34,22 +41,27 @@ export default class Timeline extends Component {
           Timeline Range
         </label>
         <p>
-          Value: <span id="timelineValue"> {this.state.value}</span>
+          Value:
+          <span id="timelineValue">
+            {console.log("this.state.value: " + this.state.value)}
+            {new Date(Number(this.state.value)).toISOString().split("T")[0]}
+          </span>
         </p>
         <input
           id="timelineRange"
           type="range"
           min={this.state.min}
           max={this.state.max}
+          value={this.state.value}
           onChange={this.handleChange}
         />
         <Row id="timelineRangeLabels" style={{ fontSize: "0.75em" }}>
           <Col sm={12}>
             <div id="minDate" style={{ display: "inline", float: "left" }}>
-              {this.state.min}
+              {new Date(this.state.min).toISOString().split("T")[0]}
             </div>
             <div id="maxDate" style={{ display: "inline", float: "right" }}>
-              {this.state.max}
+              {new Date(this.state.max).toISOString().split("T")[0]}
             </div>
           </Col>
         </Row>

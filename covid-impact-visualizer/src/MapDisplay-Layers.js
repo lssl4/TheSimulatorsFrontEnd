@@ -8,6 +8,7 @@ import { Markers } from "ol/layer";
 const URL = "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best";
 
 const updateMapLayers = (dateMilliseconds) => {
+  console.log("here it is in mdl: " + dateMilliseconds);
   var dateParameter =
     "/?TIME=" + new Date(dateMilliseconds).toISOString().split("T")[0]; // "/?TIME=2020-05-29";
 

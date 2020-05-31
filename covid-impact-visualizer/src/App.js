@@ -7,6 +7,20 @@ import "./App.css";
 import "./Sidebar.css";
 import Timeline from "./Timeline";
 
+import {
+  ScaleLine,
+  ZoomSlider,
+  defaults as DefaultControls,
+  OverviewMap,
+  MousePosition,
+} from "ol/control";
+import {
+  DragRotateAndZoom,
+  defaults as DefaultInteractions,
+} from "ol/interaction";
+
+import { Map, View, Feature } from "ol";
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -17,8 +31,36 @@ class App extends React.Component {
   }
 
   getMinAndMaxDate() {
-    return { min: "34", max: "90" };
+    return { min: "1262275200000", max: "1588262400000" };
   }
+
+  updateMap = (mapLayersArray) => {
+    // Create an Openlayer Map instance which will hold the different map layers
+
+    var result = new Map({
+      //Display the map in the div with the id of 'map'
+      target: "map",
+      layers: mapLayersArray,
+      interactions: DefaultInteractions().extend([new DragRotateAndZoom()]),
+
+      //Add in the following map controls TODO: Need to update so user can interact with map
+      controls: DefaultControls().extend([
+        new ZoomSlider(),
+        new ScaleLine(),
+        new OverviewMap(),
+        new MousePosition(),
+      ]),
+
+      //Render the tile layers in a map view with a geographical projection
+      view: new View({
+        projection: "EPSG:4326",
+        center: [0, 0],
+        zoom: 1,
+      }),
+    });
+
+    return result;
+  };
 
   componentWillMount() {
     var dates = this.getMinAndMaxDate();
@@ -41,7 +83,10 @@ class App extends React.Component {
 
           <Row className="justify-content-sm-center">
             <Col sm={9}>
-              <MapDisplay date={this.state.selectedDate}></MapDisplay>
+              <MapDisplay
+                date={this.state.selectedDate}
+                updateMap={this.updateMap}
+              ></MapDisplay>
             </Col>
             <Col sm={3}>
               <div className="sidebar">
@@ -61,7 +106,11 @@ class App extends React.Component {
 
           <Row className="timeline">
             <Col sm={12}>
-              <Timeline min="2" max="110" />
+              <Timeline
+                min={this.state.minDate}
+                max={this.state.maxDate}
+                updateMap={this.updateMap}
+              />
             </Col>
           </Row>
         </Container>
