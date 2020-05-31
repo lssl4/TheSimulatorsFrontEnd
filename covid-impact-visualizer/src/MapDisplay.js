@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import { Map, View } from "ol";
-import { Tile as TileLayer } from "ol/layer";
-import { WMTS as WMTSSource } from "ol/source";
-import WMTSTileGrid from "ol/tilegrid/WMTS";
-import { ScaleLine, ZoomSlider, defaults as DefaultControls } from "ol/control";
+import { ScaleLine, ZoomSlider, defaults as DefaultControls, OverviewMap } from "ol/control";
+import { DragRotateAndZoom, defaults as DefaultInteractions } from 'ol/interaction';
+import {baseLayer, populationDensityLayer, landSurfaceDayTempLayer, landSurfaceNightTempLayer, UVDoesAndIndexLayer, referenceLayer, nightTimeLightsLayer} from "./MapDisplay-Layers.js";
 
 class MapDisplay extends Component {
   constructor(props) {
@@ -26,65 +25,13 @@ class MapDisplay extends Component {
     const map = new Map({
       //Display the map in the div with the id of 'map'
       target: "map",
-      layers: [
-        new TileLayer({
-          source: new WMTSSource({
-            //TODO: first option gives real time map however data may not be available for current day yet
-            //      second option retrieves data at given date
-            //url: 'https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/',
-            url:
-              "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/?TIME=2020-05-29",
-            layer: "MODIS_Terra_CorrectedReflectance_TrueColor",
-            format: "image/jpeg",
-            matrixSet: "EPSG4326_250m",
-            tileGrid: new WMTSTileGrid({
-              origin: [-180, 90],
-              resolutions: [
-                0.5625,
-                0.28125,
-                0.140625,
-                0.0703125,
-                0.03515625,
-                0.017578125,
-                0.0087890625,
-                0.00439453125,
-                0.002197265625,
-              ],
-              matrixIds: [0, 1, 2, 3, 4, 5, 6, 7, 8],
-              tileSize: 512,
-            }),
-          }),
-          name: "BaseLayer",
-        }),
-        new TileLayer({
-          source: new WMTSSource({
-            url: "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/",
-            layer: "GPW_Population_Density_2020",
-            format: "image/png",
-            matrixSet: "EPSG4326_1km",
-            tileGrid: new WMTSTileGrid({
-              origin: [-180, 90],
-              resolutions: [
-                0.5625,
-                0.28125,
-                0.140625,
-                0.0703125,
-                0.03515625,
-                0.017578125,
-                0.0087890625,
-                0.00439453125,
-                0.002197265625,
-              ],
-              matrixIds: [0, 1, 2, 3, 4, 5, 6, 7, 8],
-              tileSize: 512,
-            }),
-          }),
-          name: "PopulationDensity",
-        }),
-      ],
-      //Add in the following map controls
-      controls: DefaultControls().extend([new ZoomSlider(), new ScaleLine()]),
-      //Render the tile layers in a map view with a Mercator projection
+      layers: [ baseLayer, populationDensityLayer, landSurfaceDayTempLayer, landSurfaceNightTempLayer, nightTimeLightsLayer, referenceLayer ],
+      interactions: DefaultInteractions().extend([new DragRotateAndZoom()]),
+
+      //Add in the following map controls TODO: Need to update so user can interact with map
+      controls: DefaultControls().extend([new ZoomSlider(), new ScaleLine(), new OverviewMap()]),
+
+      //Render the tile layers in a map view with a geographical projection
       view: new View({
         projection: "EPSG:4326",
         center: [0, 0],
