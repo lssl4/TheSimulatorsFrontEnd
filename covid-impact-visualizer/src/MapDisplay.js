@@ -24,7 +24,7 @@ import { Vector as VectorLayer } from "ol/layer";
 import { Vector } from "ol/source";
 import { Style, Icon } from "ol/style";
 import { Point } from "ol/geom";
-import { fromLonLat } from "ol/proj";
+import { transform } from "ol/proj";
 
 class MapDisplay extends Component {
   map = new Map();
@@ -58,8 +58,7 @@ class MapDisplay extends Component {
         landSurfaceDayTempLayer,
         landSurfaceNightTempLayer,
         nightTimeLightsLayer,
-        referenceLayer,
-        vectorLayer,
+        referenceLayer
       ],
       interactions: DefaultInteractions().extend([new DragRotateAndZoom()]),
 

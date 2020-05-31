@@ -40,12 +40,7 @@ class App extends React.Component {
           </Row>
 
           <Row className="justify-content-sm-center">
-            <Col sm={3}>
-              <div className="sidebar">
-                <h2> Covid Data </h2>
-                
-              </div>
-            </Col>
+            
             <Col sm={9}>
               <MapDisplay></MapDisplay>
             </Col>
