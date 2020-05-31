@@ -1,13 +1,12 @@
 import React from "react";
-import HorizontalTimeline from "react-horizontal-timeline";
 import MapDisplay from "./MapDisplay";
+import "./Timeline";
 import { Container, Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import "./App.css";
 import "./Sidebar.css";
-
-const VALUES = ["2019-01-01", "2019-02-01", "2019-03-01"];
+import Timeline from "./Timeline";
 
 class App extends React.Component {
   state = { value: 0, previous: 0 };
@@ -45,17 +44,10 @@ class App extends React.Component {
           </Row>
 
           <Row className="timeline">
-            <Col>
-              <HorizontalTimeline
-                index={this.state.value}
-                indexClick={(index) => {
-                  this.setState({ value: index, previous: this.state.value });
-                }}
-                values={VALUES}
-              />
+            <Col sm={12}>
+              <Timeline />
             </Col>
           </Row>
-          <div style={{ textAlign: "center" }}>New one</div>
         </Container>
       </body>
     );
