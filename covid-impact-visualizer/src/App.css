@@ -3,3 +3,7 @@ body {
   color: white;
   background-color: #264653;
 }
+
+#timelineRange {
+  width: 100%;
+}
