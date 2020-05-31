@@ -10,6 +10,7 @@ import Timeline from "./Timeline";
 class App extends React.Component {
   render() {
     return (
+      
       <body>
         <Container>
           <Row className="justify-content-sm-center">
@@ -22,7 +23,7 @@ class App extends React.Component {
 
           <Row className="justify-content-sm-center">
             <Col sm={9}>
-              <MapDisplay />
+              <MapDisplay></MapDisplay>
             </Col>
             <Col sm={3}>
               <div className="sidebar">
