@@ -87,6 +87,7 @@
   }
   
   .population_text {
+    font-size: small;
     margin-top: 10px;
     float:right;
       margin-left:10px;
