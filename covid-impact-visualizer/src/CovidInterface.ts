@@ -8,6 +8,7 @@ interface CovidDataInterface {
     country : string;
     latitude: number;
     longitude : number;
+    date : number;
 }
 
 export default CovidDataInterface
