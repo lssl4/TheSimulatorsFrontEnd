@@ -50,21 +50,13 @@ class MapDisplay extends Component {
       style: new Style({ pointRadius: 6, fillColor: "red", fillOpacity: 0.5 }),
     });
 
-    var layersObject = updateMapLayers(this.state.date);
+    var mapLayersArray = updateMapLayers(this.state.date);
 
     // Create an Openlayer Map instance which will hold the different map layers
     this.map = new Map({
       //Display the map in the div with the id of 'map'
       target: "map",
-      layers: [
-        layersObject.baseLayer,
-        layersObject.populationDensityLayer,
-        layersObject.landSurfaceDayTempLayer,
-        layersObject.landSurfaceNightTempLayer,
-        layersObject.nightTimeLightsLayer,
-        layersObject.referenceLayer,
-        vectorLayer,
-      ],
+      layers: mapLayersArray,
       interactions: DefaultInteractions().extend([new DragRotateAndZoom()]),
 
       //Add in the following map controls TODO: Need to update so user can interact with map

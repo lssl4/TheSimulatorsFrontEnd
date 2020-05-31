@@ -7,12 +7,12 @@ import { Markers } from "ol/layer";
 
 const URL = "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best";
 
-const updateMapLayers = async (dateMilliseconds) => {
+const updateMapLayers = (dateMilliseconds) => {
   var dateParameter =
     "/?TIME=" + new Date(dateMilliseconds).toISOString().split("T")[0]; // "/?TIME=2020-05-29";
 
-  var result = {};
-  const baseLayer = await new TileLayer({
+  var result = [];
+  const baseLayer = new TileLayer({
     source: new WMTSSource({
       //TODO: first option gives real time map however data may not be available for current day yet
       //      second option retrieves data at given date
@@ -40,9 +40,10 @@ const updateMapLayers = async (dateMilliseconds) => {
     }),
     name: "BaseLayer",
   });
-  result.baseLayer = baseLayer;
 
-  const populationDensityLayer = await new TileLayer({
+  result.push(baseLayer);
+
+  const populationDensityLayer = new TileLayer({
     source: new WMTSSource({
       url: URL,
       layer: "GPW_Population_Density_2020",
@@ -67,9 +68,10 @@ const updateMapLayers = async (dateMilliseconds) => {
     }),
     name: "PopulationDensity",
   });
-  result.populationDensityLayer = populationDensityLayer;
 
-  const landSurfaceDayTempLayer = await new TileLayer({
+  result.push(populationDensityLayer);
+
+  const landSurfaceDayTempLayer = new TileLayer({
     source: new WMTSSource({
       url: URL + dateParameter,
       layer: "MODIS_Terra_Land_Surface_Temp_Day",
@@ -94,9 +96,9 @@ const updateMapLayers = async (dateMilliseconds) => {
     }),
     name: "LandSurfaceDayTemperature",
   });
-  result.landSurfaceDayTempLayer = landSurfaceDayTempLayer;
+  result.push(landSurfaceDayTempLayer);
 
-  const landSurfaceNightTempLayer = await new TileLayer({
+  const landSurfaceNightTempLayer = new TileLayer({
     source: new WMTSSource({
       url: URL + dateParameter,
       layer: "MODIS_Terra_Land_Surface_Temp_Night",
@@ -121,9 +123,9 @@ const updateMapLayers = async (dateMilliseconds) => {
     }),
     name: "LandSurfaceNightTemperature",
   });
-  result.landSurfaceDayTempLayer = landSurfaceNightTempLayer;
+  result.push(landSurfaceNightTempLayer);
 
-  const UVDoesAndIndexLayer = await new TileLayer({
+  const UVDoesAndIndexLayer = new TileLayer({
     source: new WMTSSource({
       url: URL,
       layer: "OMI_UV_Erythemal_Daily_Dose",
@@ -148,10 +150,9 @@ const updateMapLayers = async (dateMilliseconds) => {
     }),
     name: "UVDoesAndIndex",
   });
+  result.push(UVDoesAndIndexLayer);
 
-  result.UVDoesAndIndexLayer = UVDoesAndIndexLayer;
-
-  const nightTimeLightsLayer = await new TileLayer({
+  const nightTimeLightsLayer = new TileLayer({
     source: new WMTSSource({
       url: URL + dateParameter,
       layer: "VIIRS_SNPP_DayNightBand_ENCC",
@@ -176,10 +177,9 @@ const updateMapLayers = async (dateMilliseconds) => {
     }),
     name: "NightTimeLights",
   });
+  result.push(nightTimeLightsLayer);
 
-  result.nightTimeLightsLayer = nightTimeLightsLayer;
-
-  const referenceLayer = await new TileLayer({
+  const referenceLayer = new TileLayer({
     source: new WMTSSource({
       url: URL,
       layer: "Reference_Labels",
@@ -205,7 +205,7 @@ const updateMapLayers = async (dateMilliseconds) => {
     name: "PlaceLabels",
   });
 
-  result.referenceLayer = referenceLayer;
+  result.push(referenceLayer);
 
   return result;
 };
