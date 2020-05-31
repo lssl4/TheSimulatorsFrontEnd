@@ -1,13 +1,9 @@
 import React, { Component } from "react";
-import { Map, View, Feature } from "ol";
+import { Map, View } from "ol";
 import { ScaleLine, ZoomSlider, defaults as DefaultControls, OverviewMap, MousePosition } from "ol/control";
 import { DragRotateAndZoom, defaults as DefaultInteractions } from 'ol/interaction';
 import {baseLayer, populationDensityLayer, landSurfaceDayTempLayer, landSurfaceNightTempLayer, UVDoesAndIndexLayer, referenceLayer, nightTimeLightsLayer} from "./MapDisplay-Layers.js";
-import { Vector as VectorLayer } from "ol/layer";
-import { Vector } from "ol/source";
-import { Style, Icon } from "ol/style";
-import { Point } from "ol/geom";
-import{ fromLonLat } from "ol/proj";
+import{ transform } from "ol/proj";
 
 
 class MapDisplay extends Component {
@@ -31,21 +27,12 @@ class MapDisplay extends Component {
 
   componentDidMount() {
 
-    var vectorLayer = new VectorLayer({
-      source: new Vector({
-        features: [new Feature({ geometry: new Point(fromLonLat([24, 24]))
-      })]
-      }),
-      style: new Style({ pointRadius: 6, fillColor: "red", fillOpacity: 0.5 })
-    });
-
     // Create an Openlayer Map instance which will hold the different map layers
     this.map = new Map({
       //Display the map in the div with the id of 'map'
       target: "map",
-      layers: [ baseLayer, populationDensityLayer, landSurfaceDayTempLayer, landSurfaceNightTempLayer, nightTimeLightsLayer, referenceLayer, vectorLayer ],
+      layers: [ baseLayer, populationDensityLayer, landSurfaceDayTempLayer, landSurfaceNightTempLayer, nightTimeLightsLayer, referenceLayer ],
       interactions: DefaultInteractions().extend([new DragRotateAndZoom()]),
-
 
       //Add in the following map controls TODO: Need to update so user can interact with map
       controls: DefaultControls().extend([new ZoomSlider(), new ScaleLine(), new OverviewMap(), new MousePosition()]),
@@ -57,6 +44,11 @@ class MapDisplay extends Component {
         zoom: 1,
       }),
     });
+
+    //TODO: later this data can be used to get covid data cloest to selected coordinate
+    this.map.on('click', function(evt){
+      let coordinate = transform(evt.coordinate);
+    })
   }
 
   componentWillUnmount() {

@@ -6,6 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import "./Sidebar.css";
 import Timeline from "./Timeline";
+import CovidDisplay from "./CovidDisplay";
 
 class App extends React.Component {
   render() {
@@ -22,6 +23,12 @@ class App extends React.Component {
           </Row>
 
           <Row className="justify-content-sm-center">
+            <Col sm={3}>
+              <div className="sidebar">
+                <h2> Covid Data </h2>
+                <CovidDisplay></CovidDisplay>
+              </div>
+            </Col>
             <Col sm={9}>
               <MapDisplay></MapDisplay>
             </Col>
