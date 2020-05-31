@@ -34,22 +34,26 @@ export default class Timeline extends Component {
           Timeline Range
         </label>
         <p>
-          Value: <span id="timelineValue"> {this.state.value}</span>
+          Value:{" "}
+          <span id="timelineValue">
+            {new Date(Number(this.state.value)).toISOString().split("T")[0]}
+          </span>
         </p>
         <input
           id="timelineRange"
           type="range"
           min={this.state.min}
           max={this.state.max}
+          value={this.state.value}
           onChange={this.handleChange}
         />
         <Row id="timelineRangeLabels" style={{ fontSize: "0.75em" }}>
           <Col sm={12}>
             <div id="minDate" style={{ display: "inline", float: "left" }}>
-              {this.state.min}
+              {new Date(this.state.min).toISOString().split("T")[0]}
             </div>
             <div id="maxDate" style={{ display: "inline", float: "right" }}>
-              {this.state.max}
+              {new Date(this.state.max).toISOString().split("T")[0]}
             </div>
           </Col>
         </Row>

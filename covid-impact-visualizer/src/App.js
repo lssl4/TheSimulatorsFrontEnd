@@ -6,10 +6,27 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import "./App.css";
 import "./Sidebar.css";
-
-const VALUES = ["2019-01-01", "2019-02-01", "2019-03-01"];
+import Timeline from "./Timeline";
+import CovidDisplay from "./CovidDisplay";
 
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      minDate: 0,
+      maxDate: 0,
+    };
+  }
+
+  getMinAndMaxDate() {
+    return { min: "1262275200000", max: "1588262400000" };
+  }
+  componentWillMount() {
+    var dates = this.getMinAndMaxDate();
+    this.state.minDate = Number(dates.min);
+    this.state.maxDate = Number(dates.max);
+    this.state.selectedDate = (Number(dates.min) + Number(dates.max)) / 2;
+  }
   render() {
     return (
 
@@ -24,6 +41,7 @@ class App extends React.Component {
           </Row>
 
           <Row className="justify-content-sm-center">
+            
             <Col sm={9}>
               <MapDisplay></MapDisplay>
             </Col>
@@ -77,7 +95,7 @@ class App extends React.Component {
 
           <Row className="timeline">
             <Col sm={12}>
-              {/* <Timeline min="2" max="110" /> */}
+              <Timeline min={this.state.minDate} max={this.state.maxDate} />
             </Col>
           </Row>
           <div style={{ textAlign: "center" }}>New one</div>

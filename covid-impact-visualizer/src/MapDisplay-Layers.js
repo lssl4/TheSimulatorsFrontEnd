@@ -175,30 +175,6 @@ const nightTimeLightsLayer = new TileLayer({
 
 export { nightTimeLightsLayer };
 
-/*
-var styleMap = new StyleMap({pointRadius: 6, fillColor: "red", fillOpacity: 0.5 });
-const markersLayer = new VectorLayer({ styleMap: styleMap});
-var exampleCity= {
-  confirmedCases:10,
-  recoveredCases:5,
-  activeCases:3,
-  deaths:2,
-  city:"Brisbane",
-  state:"Queensland",
-  country:"Australia",
-  longitude:100.0,
-  latitude:100.0 };
-
-var covidCityCases = [ exampleCity ];
-for(var i = 0; i < covidCityCases.length; i++) {
-    var longitude = covidCityCases[i].longitude;
-    var latitude = covidCityCases[i].latitude;
-    var feature = new VectorFeature(
-      new Point(longitude, latitude), {description: "Confirmed: " + covidCityCases[i].confirmedCases});
-    markersLayer[i].addFeatures(feature);
-}
-*/
-
 const referenceLayer = new TileLayer({
   source: new WMTSSource({
     url: URL,
