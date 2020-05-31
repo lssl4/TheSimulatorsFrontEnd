@@ -8,8 +8,6 @@ import "./Sidebar.css";
 import Timeline from "./Timeline";
 
 class App extends React.Component {
-  state = { value: 0, previous: 0 };
-
   render() {
     return (
       <body>
@@ -44,7 +42,7 @@ class App extends React.Component {
 
           <Row className="timeline">
             <Col sm={12}>
-              <Timeline />
+              <Timeline min="2" max="110" />
             </Col>
           </Row>
         </Container>
