@@ -15,8 +15,7 @@
     "react-bootstrap": "^1.0.1",
     "react-dom": "^16.13.1",
     "react-horizontal-timeline": "^1.5.3",
-    "react-scripts": "3.4.1",
-    "typescript": "^3.9.3"
+    "react-scripts": "3.4.1"
   },
   "scripts": {
     "start": "react-scripts start",

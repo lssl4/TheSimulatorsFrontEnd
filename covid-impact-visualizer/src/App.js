@@ -1,4 +1,5 @@
 import React from "react";
+import HorizontalTimeline from "react-horizontal-timeline";
 import MapDisplay from "./MapDisplay";
 import { Container, Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -28,7 +29,7 @@ class App extends React.Component {
   }
   render() {
     return (
-      
+
       <body>
         <Container>
           <Row className="justify-content-sm-center">
@@ -49,6 +50,7 @@ class App extends React.Component {
                 <h2>Factors</h2>
 
                 <label class="switch">
+
                   <input type="checkbox"></input>
                   <span class="slider round"></span>
                 </label>
@@ -56,6 +58,37 @@ class App extends React.Component {
                 <div className="population_text">
                   <b>Population Density</b>
                 </div>
+
+                <label class="switch">
+
+                  <input type="checkbox"></input>
+                  <span class="slider round"></span>
+                </label>
+
+                <div className="population_text">
+                  <b>Surface Day Temp</b>
+                </div>
+
+                <label class="switch">
+
+                  <input type="checkbox"></input>
+                  <span class="slider round"></span>
+                </label>
+
+                <div className="population_text">
+                  <b>Surface Night Temp</b>
+                </div>
+
+                <label class="switch">
+
+                  <input type="checkbox"></input>
+                  <span class="slider round"></span>
+                </label>
+
+                <div className="population_text">
+                  <b>Surface Night Lights</b>
+                </div>
+
               </div>
             </Col>
           </Row>
@@ -65,6 +98,7 @@ class App extends React.Component {
               <Timeline min={this.state.minDate} max={this.state.maxDate} />
             </Col>
           </Row>
+          <div style={{ textAlign: "center" }}>New one</div>
         </Container>
       </body>
     );
