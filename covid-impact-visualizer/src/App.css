@@ -7,3 +7,11 @@ body {
 #timelineRange {
   width: 100%;
 }
+
+#timelineRangeLabels {
+  list-style: none;
+}
+
+#timelineRangeLabels li {
+  float: left;
+}

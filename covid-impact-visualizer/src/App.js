@@ -1,6 +1,5 @@
 import React from "react";
 import MapDisplay from "./MapDisplay";
-import "./Timeline";
 import { Container, Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -9,8 +8,6 @@ import "./Sidebar.css";
 import Timeline from "./Timeline";
 
 class App extends React.Component {
-  state = { value: 0, previous: 0 };
-
   render() {
     return (
       
@@ -46,7 +43,7 @@ class App extends React.Component {
 
           <Row className="timeline">
             <Col sm={12}>
-              <Timeline />
+              <Timeline min="2" max="110" />
             </Col>
           </Row>
         </Container>
