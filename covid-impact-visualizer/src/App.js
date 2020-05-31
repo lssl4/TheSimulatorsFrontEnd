@@ -61,6 +61,15 @@ class App extends React.Component {
                   <b>Surface Night Temp</b>
                 </div>
 
+                <label class="switch">
+
+                  <input type="checkbox"></input>
+                  <span class="slider round"></span>
+                </label>
+
+                <div className="population_text">
+                  <b>Surface Night Lights</b>
+                </div>
 
               </div>
             </Col>
