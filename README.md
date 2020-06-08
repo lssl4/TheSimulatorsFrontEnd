@@ -15,8 +15,11 @@ The second is that it attempts to consolidate various sources of data from vario
 <b>Members:</b>
 
 Madelyne Mazzaferro
+
 Ethan Pui
+
 David Lawson
+
 Siong Leong
 
 
