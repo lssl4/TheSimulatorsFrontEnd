@@ -5,8 +5,8 @@ import { Container, Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import "./App.css";
-import "./Sidebar.css";
 import Timeline from "./Timeline";
+import Sidebar from "./Sidebar";
 import CovidDisplay from "./CovidDisplay";
 
 class App extends React.Component {
@@ -33,9 +33,9 @@ class App extends React.Component {
         <Container>
           <Row className="justify-content-sm-center">
             <Col>
-              <header style={{ textAlign: "center" }} className="App-header">
+              <h1 style={{ textAlign: "center" }} className="App-header">
                 World Map
-              </header>
+              </h1>
             </Col>
           </Row>
 
@@ -44,45 +44,7 @@ class App extends React.Component {
               <MapDisplay></MapDisplay>
             </Col>
             <Col sm={3}>
-              <div className="sidebar">
-                <h2>Factors</h2>
-
-                <label class="switch">
-                  <input type="checkbox"></input>
-                  <span class="slider round"></span>
-                </label>
-
-                <div className="population_text">
-                  <b>Population Density</b>
-                </div>
-
-                <label class="switch">
-                  <input type="checkbox"></input>
-                  <span class="slider round"></span>
-                </label>
-
-                <div className="population_text">
-                  <b>Surface Day Temp</b>
-                </div>
-
-                <label class="switch">
-                  <input type="checkbox"></input>
-                  <span class="slider round"></span>
-                </label>
-
-                <div className="population_text">
-                  <b>Surface Night Temp</b>
-                </div>
-
-                <label class="switch">
-                  <input type="checkbox"></input>
-                  <span class="slider round"></span>
-                </label>
-
-                <div className="population_text">
-                  <b>Surface Night Lights</b>
-                </div>
-              </div>
+              <Sidebar></Sidebar>
             </Col>
           </Row>
 
